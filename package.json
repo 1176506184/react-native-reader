@@ -1,0 +1,53 @@
+{
+  "name": "@1176506184/react-native-reader",
+  "version": "0.1.0",
+  "description": "A lightweight React Native novel reader with vertical, cover, slide, simulation, and no-animation page modes.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/1176506184/react-native-reader.git"
+  },
+  "keywords": [
+    "react-native",
+    "reader",
+    "novel",
+    "ebook",
+    "pagination",
+    "page-flip"
+  ],
+  "main": "src/index.ts",
+  "module": "src/index.ts",
+  "react-native": "src/index.ts",
+  "types": "src/index.ts",
+  "exports": {
+    ".": {
+      "react-native": "./src/index.ts",
+      "types": "./src/index.ts",
+      "default": "./src/index.ts"
+    }
+  },
+  "files": [
+    "src",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "pack:dry-run": "npm pack --dry-run"
+  },
+  "peerDependencies": {
+    "react": ">=18.0.0",
+    "react-native": ">=0.72.0"
+  },
+  "dependencies": {
+    "htmlparser2": "^10.1.0"
+  },
+  "devDependencies": {
+    "@types/react": ">=18.0.0",
+    "react": ">=18.0.0",
+    "react-native": ">=0.72.0",
+    "typescript": ">=5.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
