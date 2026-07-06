@@ -1,5 +1,5 @@
 {
-  "name": "@1176506184/react-native-reader",
+  "name": "@tangfeifan/react-native-reader",
   "version": "0.1.0",
   "description": "A lightweight React Native novel reader with vertical, cover, slide, simulation, and no-animation page modes.",
   "license": "MIT",

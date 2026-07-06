@@ -21,7 +21,7 @@ yarn add https://github.com/1176506184/react-native-reader.git
 发布到 npm 后可使用：
 
 ```bash
-npm install @1176506184/react-native-reader
+npm install @tangfeifan/react-native-reader
 ```
 
 ## 基础用法
@@ -29,7 +29,7 @@ npm install @1176506184/react-native-reader
 ```tsx
 import React from 'react';
 import { useWindowDimensions } from 'react-native';
-import { Reader } from '@1176506184/react-native-reader';
+import { Reader } from '@tangfeifan/react-native-reader';
 
 export function ChapterReader({ html }: { html: string }) {
   const { width, height } = useWindowDimensions();
@@ -69,7 +69,7 @@ import {
   PaginationCalculator,
   ReaderFlip,
   type PageData,
-} from '@1176506184/react-native-reader';
+} from '@tangfeifan/react-native-reader';
 ```
 
 先用 `PaginationCalculator` 把章节 HTML 转成 `PageData[]`，再把当前章、上一章、下一章的 pages 拼接后传给 `ReaderFlip`。这样可以和 App 里的章节缓存、进度保存逻辑继续解耦。
