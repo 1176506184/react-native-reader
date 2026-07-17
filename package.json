@@ -1,6 +1,6 @@
 {
   "name": "@tangfeifan/react-native-reader",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "A React Native novel and ebook reader core with pagination, chapter boundaries, locked pages, and five page-turn modes.",
   "license": "MIT",
   "repository": {
