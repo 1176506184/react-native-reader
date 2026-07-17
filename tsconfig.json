@@ -8,9 +8,7 @@
     "skipLibCheck": true,
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
-    "declaration": true,
-    "emitDeclarationOnly": true,
-    "outDir": "dist/types"
+    "noEmit": true
   },
   "include": [
     "src"

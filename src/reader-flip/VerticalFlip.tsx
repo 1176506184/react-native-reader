@@ -25,6 +25,7 @@ export const VerticalFlip: React.FC<ReaderFlipBaseProps> = ({
   contentTopPadding,
   renderBackIcon,
   onBack,
+  lockedOverlay,
 }) => {
   const scrollRef = useRef<ScrollView>(null);
   const lastPageRef = useRef(currentPage);
@@ -53,27 +54,33 @@ export const VerticalFlip: React.FC<ReaderFlipBaseProps> = ({
         onScrollEndDrag={handleScrollEnd}
         onTouchEnd={onTapCenter}
       >
-        {pages.map((page) => (
-          <PageFrame
-            key={`${page.chapterId ?? 'chapter'}-${page.index}`}
-            page={page}
-            width={width}
-            height={height}
-            themeColor={themeColor}
-            textColor={textColor}
-            fontSize={fontSize}
-            lineHeight={lineHeight}
-            headerTitle={headerTitle}
-            chapterInfoText={chapterInfoText}
-            moveChromeWithPage={moveChromeWithPage}
-            topChromeHeight={topChromeHeight}
-            bottomChromeHeight={bottomChromeHeight}
-            topSafeInset={topSafeInset}
-            contentHorizontalPadding={contentHorizontalPadding}
-            contentTopPadding={contentTopPadding}
-            renderBackIcon={renderBackIcon}
-            onBack={onBack}
-          />
+        {pages.map((page, index) => (
+          <View key={`${page.chapterId ?? 'chapter'}-${page.chapterPageIndex ?? page.index}`} style={{ width, height }}>
+            <PageFrame
+              page={page}
+              width={width}
+              height={height}
+              themeColor={themeColor}
+              textColor={textColor}
+              fontSize={fontSize}
+              lineHeight={lineHeight}
+              headerTitle={headerTitle}
+              chapterInfoText={chapterInfoText}
+              moveChromeWithPage={moveChromeWithPage}
+              topChromeHeight={topChromeHeight}
+              bottomChromeHeight={bottomChromeHeight}
+              topSafeInset={topSafeInset}
+              contentHorizontalPadding={contentHorizontalPadding}
+              contentTopPadding={contentTopPadding}
+              renderBackIcon={renderBackIcon}
+              onBack={onBack}
+            />
+            {index === currentPage && page.locked && lockedOverlay ? (
+              <View pointerEvents="box-none" style={styles.lockedOverlay}>
+                {lockedOverlay}
+              </View>
+            ) : null}
+          </View>
         ))}
       </ScrollView>
     </View>
@@ -84,5 +91,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     overflow: 'hidden',
+  },
+  lockedOverlay: {
+    ...StyleSheet.absoluteFillObject,
+    zIndex: 40,
   },
 });

@@ -27,6 +27,8 @@ export const PageFrame: React.FC<PageFrameProps> = ({
   const pageHeaderTitle = page?.chapterTitle || headerTitle;
   const pageChapterInfoText = page?.chapterInfoText || chapterInfoText;
   const backIcon = renderBackIcon?.() ?? <Text style={styles.backIcon}>‹</Text>;
+  const lockedTopPadding = topInset + px(28);
+  const lockedBottomPadding = (moveChromeWithPage ? bottomChromeHeight : 0) + px(40);
 
   return (
     <View style={[styles.page, { width, height, backgroundColor: themeColor }]}>
@@ -42,27 +44,44 @@ export const PageFrame: React.FC<PageFrameProps> = ({
       ) : null}
 
       <View style={styles.content}>
-        {page?.lines.map((line, index) => (
-          <Text
-            key={`${index}-${line.y}-${line.text.length}`}
+        {page?.locked ? (
+          <View
             style={[
-              styles.line,
+              styles.lockedContent,
               {
-                left: contentHorizontalPadding,
-                right: contentHorizontalPadding,
-                top: line.y + textTopPadding,
-                color: textColor,
-                fontSize,
-                lineHeight,
+                paddingTop: lockedTopPadding,
+                paddingBottom: lockedBottomPadding,
+                paddingHorizontal: Math.max(contentHorizontalPadding, px(36)),
               },
             ]}
           >
-            {line.text || ' '}
-          </Text>
-        ))}
+            {page.lockedBadgeText ? <Text style={styles.lockedBadge}>{page.lockedBadgeText}</Text> : null}
+            {page.lockedTitle ? <Text style={[styles.lockedTitle, { color: textColor }]}>{page.lockedTitle}</Text> : null}
+            {page.lockedDescription ? <Text style={styles.lockedDescription}>{page.lockedDescription}</Text> : null}
+          </View>
+        ) : (
+          page?.lines.map((line, index) => (
+            <Text
+              key={`${index}-${line.y}-${line.text.length}`}
+              style={[
+                styles.line,
+                {
+                  left: contentHorizontalPadding,
+                  right: contentHorizontalPadding,
+                  top: line.y + textTopPadding,
+                  color: textColor,
+                  fontSize,
+                  lineHeight,
+                },
+              ]}
+            >
+              {line.text || ' '}
+            </Text>
+          ))
+        )}
       </View>
 
-      {moveChromeWithPage ? (
+      {moveChromeWithPage && !page?.locked ? (
         <View
           style={[
             styles.footer,
@@ -102,6 +121,30 @@ const styles = StyleSheet.create({
   },
   line: {
     position: 'absolute',
+  },
+  lockedContent: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  lockedBadge: {
+    marginBottom: px(12),
+    color: '#999999',
+    fontSize: sp(12),
+    fontWeight: '700',
+  },
+  lockedTitle: {
+    fontSize: sp(20),
+    fontWeight: '700',
+    lineHeight: sp(27),
+    textAlign: 'center',
+  },
+  lockedDescription: {
+    marginTop: px(10),
+    color: '#999999',
+    fontSize: sp(14),
+    lineHeight: sp(22),
+    textAlign: 'center',
   },
   footer: {
     position: 'absolute',

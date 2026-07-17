@@ -5,6 +5,7 @@ export type ChineseFlipMode = '上下' | '覆蓋' | '平移' | '仿真' | '無�
 export type EnglishFlipMode = 'vertical' | 'cover' | 'slide' | 'simulation' | 'none';
 export type FlipMode = ChineseFlipMode | EnglishFlipMode;
 export type NormalizedFlipMode = EnglishFlipMode;
+export type PageLockReason = 'login' | 'vip';
 
 export interface TextLine {
   text: string;
@@ -25,6 +26,11 @@ export interface PageData {
   chapterPageIndex?: number;
   chapterTitle?: string;
   chapterInfoText?: string;
+  locked?: boolean;
+  lockedReason?: PageLockReason;
+  lockedBadgeText?: string;
+  lockedTitle?: string;
+  lockedDescription?: string;
 }
 
 export interface PaginationCalculatorProps {
@@ -67,6 +73,8 @@ export interface ReaderFlipBaseProps extends PageFrameProps {
   canGoPrev?: boolean;
   onTapCenter?: () => void;
   onFlipStart?: () => void;
+  isMenuVisible?: boolean;
+  lockedOverlay?: React.ReactNode;
   contentKey?: string;
 }
 
@@ -100,6 +108,8 @@ export interface ReaderProps {
   loadingComponent?: React.ReactNode;
   renderBackIcon?: () => React.ReactNode;
   onBack?: () => void;
+  isMenuVisible?: boolean;
+  lockedOverlay?: React.ReactNode;
   onPageChange?: (page: number, pageData?: PageData) => void;
   onBoundaryPrev?: () => void;
   onBoundaryNext?: () => void;

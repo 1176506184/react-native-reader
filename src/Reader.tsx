@@ -33,6 +33,8 @@ export const Reader: React.FC<ReaderProps> = ({
   loadingComponent,
   renderBackIcon,
   onBack,
+  isMenuVisible,
+  lockedOverlay,
   onPageChange,
   onBoundaryPrev,
   onBoundaryNext,
@@ -149,6 +151,8 @@ export const Reader: React.FC<ReaderProps> = ({
           onRequestNextChapter={onBoundaryNext}
           onTapCenter={onTapCenter}
           onFlipStart={onFlipStart}
+          isMenuVisible={isMenuVisible}
+          lockedOverlay={lockedOverlay}
           flipMode={flipMode}
           themeColor={themeColor}
           textColor={textColor}
@@ -166,7 +170,7 @@ export const Reader: React.FC<ReaderProps> = ({
           contentTopPadding={contentTopPadding}
           renderBackIcon={renderBackIcon}
           onBack={onBack}
-          contentKey={contentKey}
+          contentKey={paginationKey}
         />
       ) : (
         loadingComponent || (

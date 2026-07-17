@@ -14,6 +14,7 @@ export type {
   EnglishFlipMode,
   FlipMode,
   NormalizedFlipMode,
+  PageLockReason,
   PageData,
   PageFrameProps,
   PaginationCalculatorProps,
